@@ -15,7 +15,7 @@ ENV SCALA_HOME /usr/local/share/scala
 ## Piping curl directly in tar
 RUN \
   curl -fsL http://downloads.typesafe.com/scala/$SCALA_VERSION/scala-$SCALA_VERSION.tgz | tar xfz - -C $SCALA_HOME && \
-  ln -t $SCALA_HOME -sf scala-$SCALA_VERSION scala
+  ln -t $SCALA_HOME -sf scala-$SCALA_VERSION scala && \
   echo '#!/bin/bash' > /etc/profile.d/scala.sh && \
   echo 'export PATH=$SCALA_HOME/bin:$PATH' >> /etc/profile.d/scala.sh
 
