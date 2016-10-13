@@ -5,17 +5,19 @@
 #
 
 # Pull base image
-FROM java:8
+FROM java:latest
 
 ENV SCALA_VERSION 2.11.8
 ENV SBT_VERSION 0.13.12
+ENV SCALA_HOME /usr/local/share/scala
 
 # Install Scala
 ## Piping curl directly in tar
 RUN \
-  curl -fsL http://downloads.typesafe.com/scala/$SCALA_VERSION/scala-$SCALA_VERSION.tgz | tar xfz - -C /root/ && \
-  echo >> /root/.bashrc && \
-  echo 'export PATH=~/scala-$SCALA_VERSION/bin:$PATH' >> /root/.bashrc
+  curl -fsL http://downloads.typesafe.com/scala/$SCALA_VERSION/scala-$SCALA_VERSION.tgz | tar xfz - -C $SCALA_HOME && \
+  ln -t $SCALA_HOME -sf scala-$SCALA_VERSION scala
+  echo '#!/bin/bash' > /etc/profile.d/scala.sh && \
+  echo 'export PATH=$SCALA_HOME/bin:$PATH' >> /etc/profile.d/scala.sh
 
 # Install sbt
 RUN \
