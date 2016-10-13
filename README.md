@@ -5,7 +5,7 @@ This repository contains **Dockerfile** of [Scala](http://www.scala-lang.org) an
 
 ## Base Docker Image ##
 
-* [java:8](https://registry.hub.docker.com/_/java/)
+* [java:latest](https://registry.hub.docker.com/_/java/)
 
 
 ## Installation ##
